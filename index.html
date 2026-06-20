@@ -176,7 +176,7 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center 60%;
+    object-position: center 15%;
     display: block;
   }
 
@@ -590,49 +590,65 @@
   /* ---- SKILLS ---- */
   .skills-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 32px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
   }
+
+  .skill-group {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 24px 28px;
+    transition: border-color 0.25s;
+  }
+
+  .skill-group:hover { border-color: rgba(61,232,160,0.25); }
 
   .skill-group-label {
     font-family: var(--mono);
     font-size: 11px;
-    color: var(--text-muted);
-    letter-spacing: 0.12em;
+    color: var(--accent);
+    letter-spacing: 0.15em;
     text-transform: uppercase;
-    margin-bottom: 16px;
-    padding-bottom: 12px;
-    border-bottom: 1px solid var(--border);
-  }
-
-  .skill-list {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .skill-list li {
-    font-size: 13px;
-    color: var(--text-secondary);
+    margin-bottom: 18px;
     display: flex;
     align-items: center;
-    gap: 10px;
-    transition: color 0.2s;
+    gap: 8px;
   }
 
-  .skill-list li::before {
+  .skill-group-label::before {
     content: '';
-    width: 4px;
-    height: 4px;
-    border-radius: 50%;
+    display: block;
+    width: 16px;
+    height: 1px;
     background: var(--accent);
-    flex-shrink: 0;
-    opacity: 0.5;
+    opacity: 0.6;
   }
 
-  .skill-list li:hover { color: var(--text-primary); }
-  .skill-list li:hover::before { opacity: 1; }
+  .skill-pills {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    list-style: none;
+  }
+
+  .skill-pills li {
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--text-secondary);
+    padding: 5px 12px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    background: var(--bg);
+    transition: color 0.2s, border-color 0.2s, background 0.2s;
+    cursor: default;
+  }
+
+  .skill-pills li:hover {
+    color: var(--accent);
+    border-color: rgba(61,232,160,0.4);
+    background: var(--accent-glow);
+  }
 
   /* ---- CONTACT ---- */
   .contact-inner {
@@ -661,7 +677,6 @@
     text-decoration: none;
     color: inherit;
     transition: padding-left 0.2s;
-    /* group: true; */
   }
 
   .contact-link:first-child { border-top: 1px solid var(--border); }
@@ -755,49 +770,129 @@
     50% { opacity: 0.4; transform: scale(0.8); }
   }
 
-  /* ---- MOBILE ---- */
+  /* ---- MOBILE NAV ---- */
   .hamburger {
     display: none;
     background: none;
-    border: none;
+    border: 1px solid var(--border);
+    border-radius: 6px;
     cursor: pointer;
     flex-direction: column;
+    justify-content: center;
     gap: 5px;
-    padding: 4px;
+    padding: 8px 10px;
+    width: 40px;
+    height: 40px;
+    transition: border-color 0.2s;
   }
+
+  .hamburger:hover { border-color: var(--accent); }
 
   .hamburger span {
     display: block;
-    width: 22px;
+    width: 18px;
     height: 1.5px;
     background: var(--text-secondary);
-    transition: all 0.3s;
+    transition: transform 0.3s ease, opacity 0.3s ease, background 0.2s;
+    transform-origin: center;
   }
+
+  .hamburger.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); background: var(--accent); }
+  .hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+  .hamburger.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); background: var(--accent); }
 
   .mobile-nav {
-    display: none;
     position: fixed;
-    inset: 60px 0 0;
-    background: rgba(5,8,15,0.97);
-    backdrop-filter: blur(20px);
+    top: 60px;
+    left: 0;
+    right: 0;
     z-index: 99;
-    padding: 2rem;
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  .mobile-nav.open { display: flex; }
-
-  .mobile-nav a {
-    font-size: 18px;
-    color: var(--text-secondary);
-    text-decoration: none;
-    padding: 12px 0;
+    background: rgba(5,8,15,0.98);
+    backdrop-filter: blur(24px);
     border-bottom: 1px solid var(--border);
-    transition: color 0.2s;
+    padding: 0 1.5rem;
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.4s cubic-bezier(0.4, 0, 0.2, 1), padding 0.3s ease;
   }
 
-  .mobile-nav a:hover { color: var(--accent); }
+  .mobile-nav.open {
+    max-height: 440px;
+    padding: 1.5rem;
+  }
+
+  .mobile-nav-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-bottom: 1.5rem;
+  }
+
+  .mobile-nav-links a {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 0;
+    border-bottom: 1px solid var(--border);
+    text-decoration: none;
+    transition: padding-left 0.2s;
+  }
+
+  .mobile-nav-links a:last-child { border-bottom: none; }
+
+  .mobile-nav-links a:hover { padding-left: 6px; }
+  .mobile-nav-links a:hover .mn-label { color: var(--accent); }
+  .mobile-nav-links a:hover .mn-num { color: var(--accent); opacity: 1; }
+
+  .mn-num {
+    font-family: var(--mono);
+    font-size: 10px;
+    color: var(--text-muted);
+    letter-spacing: 0.1em;
+    opacity: 0.6;
+    min-width: 24px;
+    transition: color 0.2s, opacity 0.2s;
+  }
+
+  .mn-label {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    transition: color 0.2s;
+    letter-spacing: 0.01em;
+  }
+
+  .mn-arrow {
+    margin-left: auto;
+    font-size: 12px;
+    color: var(--text-muted);
+    transition: color 0.2s, transform 0.2s;
+  }
+
+  .mobile-nav-links a:hover .mn-arrow {
+    color: var(--accent);
+    transform: translateX(3px);
+  }
+
+  .mobile-nav-cta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    padding: 12px;
+    background: var(--accent-dim);
+    border: 1px solid rgba(61,232,160,0.3);
+    border-radius: 6px;
+    font-family: var(--mono);
+    font-size: 12px;
+    color: var(--accent);
+    text-decoration: none;
+    letter-spacing: 0.05em;
+    transition: background 0.2s;
+  }
+
+  .mobile-nav-cta:hover { background: rgba(61,232,160,0.2); }
 
   @media (max-width: 900px) {
     .hero-inner { grid-template-columns: 1fr; gap: 48px; }
@@ -806,16 +901,15 @@
     .photo-frame { width: 220px; height: 260px; }
     .hero-photo-wrap::before { width: 260px; height: 260px; }
     .about-grid { grid-template-columns: 1fr; gap: 40px; }
-    .skills-grid { grid-template-columns: repeat(2, 1fr); }
+    .skills-grid { grid-template-columns: 1fr; }
     .exp-item { grid-template-columns: 1fr; gap: 12px; }
     .nav-links, .nav-cta { display: none; }
     .hamburger { display: flex; }
   }
 
   @media (max-width: 600px) {
-    section { padding: 72px 1.25rem; }
+    section { padding: 64px 1.25rem; }
     nav { padding: 0 1.25rem; }
-    .skills-grid { grid-template-columns: 1fr; }
     footer { flex-direction: column; gap: 12px; text-align: center; }
   }
 
@@ -838,9 +932,33 @@
   .reveal-group.visible > *:nth-child(3) { opacity: 1; transform: none; transition-delay: 0.16s; }
   .reveal-group.visible > *:nth-child(4) { opacity: 1; transform: none; transition-delay: 0.24s; }
 
-  @media (prefers-reduced-motion: reduce) {
-    .reveal, .reveal-group > * { opacity: 1; transform: none; transition: none; }
+  /* ---- SCROLL TO TOP ---- */
+  .scroll-top {
+    position: fixed;
+    bottom: 32px;
+    right: 32px;
+    width: 40px;
+    height: 40px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.3s, transform 0.3s, border-color 0.2s, background 0.2s;
+    z-index: 50;
+    text-decoration: none;
+    color: var(--text-muted);
+    font-size: 16px;
   }
+
+  .scroll-top.visible { opacity: 1; transform: translateY(0); }
+  .scroll-top:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-glow); }
+
+  @media (max-width: 600px) { .scroll-top { bottom: 20px; right: 20px; } }
 </style>
 </head>
 <body>
@@ -861,12 +979,34 @@
 </nav>
 
 <!-- MOBILE NAV -->
-<nav class="mobile-nav" id="mobileNav">
-  <a href="#about" class="mobile-link">about</a>
-  <a href="#projects" class="mobile-link">projects</a>
-  <a href="#skills" class="mobile-link">skills</a>
-  <a href="#contact" class="mobile-link">contact</a>
-</nav>
+<div class="mobile-nav" id="mobileNav">
+  <div class="mobile-nav-links">
+    <a href="#about" class="mobile-link">
+      <span class="mn-num">01</span>
+      <span class="mn-label">about</span>
+      <span class="mn-arrow">→</span>
+    </a>
+    <a href="#projects" class="mobile-link">
+      <span class="mn-num">02</span>
+      <span class="mn-label">projects</span>
+      <span class="mn-arrow">→</span>
+    </a>
+    <a href="#skills" class="mobile-link">
+      <span class="mn-num">03</span>
+      <span class="mn-label">skills</span>
+      <span class="mn-arrow">→</span>
+    </a>
+    <a href="#contact" class="mobile-link">
+      <span class="mn-num">04</span>
+      <span class="mn-label">contact</span>
+      <span class="mn-arrow">→</span>
+    </a>
+  </div>
+  <a href="/Resume.pdf" download class="mobile-nav-cta">
+    <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 15V3m0 12l-4-4m4 4l4-4M2 17l.621 2.485A2 2 0 004.561 21h14.878a2 2 0 001.94-1.515L22 17"/></svg>
+    download resume.pdf
+  </a>
+</div>
 
 <!-- HERO -->
 <section id="home">
@@ -1027,7 +1167,7 @@
       </div>
       <div class="project-links">
         <a href="https://github.com/mrdevpatmase" target="_blank" class="project-link">
-          <svg width="12" height="12" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12..."/></svg>
+          <svg width="12" height="12" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/></svg>
           github ↗
         </a>
         <a href="https://jarvis-v2-npel.onrender.com" target="_blank" class="project-link">live ↗</a>
@@ -1115,21 +1255,22 @@
   <h2 class="section-title">Technical <span>stack.</span></h2>
 
   <div class="skills-grid reveal-group">
-    <div>
+    <div class="skill-group">
       <div class="skill-group-label">ML / AI</div>
-      <ul class="skill-list">
+      <ul class="skill-pills">
         <li>Python</li>
         <li>scikit-learn</li>
         <li>TensorFlow</li>
-        <li>NumPy / Pandas</li>
+        <li>NumPy</li>
+        <li>Pandas</li>
         <li>FAISS</li>
         <li>Sentence Transformers</li>
-        <li>Ollama (local LLMs)</li>
+        <li>Ollama</li>
       </ul>
     </div>
-    <div>
+    <div class="skill-group">
       <div class="skill-group-label">NLP / Vision</div>
-      <ul class="skill-list">
+      <ul class="skill-pills">
         <li>spaCy</li>
         <li>TF-IDF</li>
         <li>RAG pipelines</li>
@@ -1137,29 +1278,31 @@
         <li>OpenCV</li>
         <li>FaceNet</li>
         <li>SpeechRecognition</li>
+        <li>Stacking Classifier</li>
       </ul>
     </div>
-    <div>
+    <div class="skill-group">
       <div class="skill-group-label">Backend / Web</div>
-      <ul class="skill-list">
+      <ul class="skill-pills">
         <li>Flask</li>
-        <li>Node.js</li>
         <li>REST API design</li>
+        <li>Node.js</li>
         <li>HTML / CSS / JS</li>
-        <li>PostgreSQL</li>
         <li>MongoDB</li>
+        <li>MySQL</li>
+        <li>Firebase</li>
         <li>Docker</li>
       </ul>
     </div>
-    <div>
+    <div class="skill-group">
       <div class="skill-group-label">Tools / Infra</div>
-      <ul class="skill-list">
+      <ul class="skill-pills">
         <li>Git / GitHub</li>
-        <li>Render (deployment)</li>
+        <li>Render</li>
         <li>Jupyter</li>
         <li>VS Code</li>
-        <li>Firebase</li>
-        <li>MySQL</li>
+        <li>Linux</li>
+        <li>Postman</li>
       </ul>
     </div>
   </div>
@@ -1203,9 +1346,12 @@
   </div>
 </section>
 
+<!-- SCROLL TO TOP -->
+<a href="#home" class="scroll-top" id="scrollTop" aria-label="Back to top">↑</a>
+
 <!-- FOOTER -->
 <footer>
-  <div class="footer-copy">dev@patmase:~$ © 2025</div>
+  <div class="footer-copy">dev@patmase:~$ © 2026</div>
   <div class="footer-made">Built with HTML, CSS, JS · Amravati, IN</div>
 </footer>
 
@@ -1214,10 +1360,14 @@
   const hamburger = document.getElementById('hamburger');
   const mobileNav = document.getElementById('mobileNav');
   hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('open');
     mobileNav.classList.toggle('open');
   });
   document.querySelectorAll('.mobile-link').forEach(link => {
-    link.addEventListener('click', () => mobileNav.classList.remove('open'));
+    link.addEventListener('click', () => {
+      hamburger.classList.remove('open');
+      mobileNav.classList.remove('open');
+    });
   });
 
   // Scroll reveal
@@ -1232,10 +1382,13 @@
   }, { threshold: 0.12 });
   revealEls.forEach(el => obs.observe(el));
 
-  // Active nav
+  // Active nav + scroll-to-top
   const sections = document.querySelectorAll('section[id]');
   const navLinks = document.querySelectorAll('.nav-links a');
+  const scrollTopBtn = document.getElementById('scrollTop');
+
   window.addEventListener('scroll', () => {
+    // active nav
     let current = '';
     sections.forEach(s => {
       if (window.scrollY >= s.offsetTop - 80) current = s.id;
@@ -1243,6 +1396,9 @@
     navLinks.forEach(a => {
       a.style.color = a.getAttribute('href') === `#${current}` ? 'var(--accent)' : '';
     });
+    // scroll-to-top
+    if (window.scrollY > 400) scrollTopBtn.classList.add('visible');
+    else scrollTopBtn.classList.remove('visible');
   }, { passive: true });
 </script>
 </body>
