@@ -4,6 +4,21 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dev Patmase — AI/ML Engineer</title>
+<meta name="description" content="Dev Patmase — AI/ML Engineer building NLP pipelines, RAG systems, and production-ready ML applications. Based in Amravati, India.">
+<meta name="keywords" content="Dev Patmase, AI ML Engineer, NLP, RAG, Python, Flask, Machine Learning, portfolio">
+<meta name="author" content="Dev Patmase">
+<meta name="theme-color" content="#05080f">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:title" content="Dev Patmase — AI/ML Engineer">
+<meta property="og:description" content="Building NLP pipelines, RAG systems, and production-ready ML applications. View my projects and get in touch.">
+<meta property="og:url" content="https://mrdevpatmase.github.io">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Dev Patmase — AI/ML Engineer">
+<meta name="twitter:description" content="Building NLP pipelines, RAG systems, and production ML apps.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
@@ -13,9 +28,8 @@
   :root {
     --bg: #05080f;
     --surface: #0c1220;
-    --surface-2: #111927;
     --border: rgba(255,255,255,0.07);
-    --border-hover: rgba(99,212,160,0.35);
+    --border-accent: rgba(61,232,160,0.35);
     --text-primary: #eef2f7;
     --text-secondary: #7a8fa8;
     --text-muted: #3d5068;
@@ -104,17 +118,6 @@
   .nav-cta:hover { background: var(--accent-dim); }
 
   /* ---- HERO ---- */
-  .hero {
-    position: relative;
-    z-index: 1;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    padding: 100px 2rem 60px;
-    max-width: 1100px;
-    margin: 0 auto;
-  }
-
   .hero-inner {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -140,10 +143,10 @@
     background: radial-gradient(circle, rgba(61,232,160,0.18) 0%, rgba(124,58,237,0.12) 50%, transparent 75%);
     border-radius: 50%;
     z-index: 0;
-    animation: glowPulse 3s ease-in-out infinite;
+    animation: softPulse 3s ease-in-out infinite;
   }
 
-  @keyframes glowPulse {
+  @keyframes softPulse {
     0%, 100% { opacity: 0.8; transform: scale(1); }
     50%       { opacity: 1;   transform: scale(1.06); }
   }
@@ -156,12 +159,8 @@
     border-radius: 24px;
     padding: 3px;
     background: linear-gradient(135deg, var(--accent), #7c3aed, #ec4899);
-    animation: borderPulse 3s ease-in-out infinite;
-  }
-
-  @keyframes borderPulse {
-    0%, 100% { box-shadow: 0 0 24px rgba(61,232,160,0.4), 0 0 60px rgba(61,232,160,0.15); }
-    50%       { box-shadow: 0 0 40px rgba(61,232,160,0.7), 0 0 90px rgba(124,58,237,0.3); }
+    animation: softPulse 3s ease-in-out infinite;
+    box-shadow: 0 0 24px rgba(61,232,160,0.4), 0 0 60px rgba(61,232,160,0.15);
   }
 
   .photo-inner {
@@ -176,7 +175,7 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center 15%;
+    object-position: center 60%;
     display: block;
   }
 
@@ -259,7 +258,7 @@
     align-items: center;
     gap: 8px;
     padding: 10px 24px;
-    border: 1px solid var(--border-hover);
+    border: 1px solid var(--border-accent);
     color: var(--text-primary);
     font-size: 13px;
     border-radius: 4px;
@@ -288,60 +287,6 @@
   }
 
   .hero-socials a:hover { color: var(--accent); }
-
-  /* Hero right: terminal card */
-  .terminal {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    overflow: hidden;
-    position: relative;
-  }
-
-  .terminal-bar {
-    padding: 12px 16px;
-    border-bottom: 1px solid var(--border);
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-
-  .dot { width: 10px; height: 10px; border-radius: 50%; }
-  .dot-r { background: #ff5f56; }
-  .dot-y { background: #ffbd2e; }
-  .dot-g { background: #27c93f; }
-
-  .terminal-title {
-    font-family: var(--mono);
-    font-size: 11px;
-    color: var(--text-muted);
-    margin-left: 8px;
-  }
-
-  .terminal-body {
-    padding: 20px 20px 24px;
-    font-family: var(--mono);
-    font-size: 13px;
-    line-height: 1.8;
-  }
-
-  .t-muted { color: var(--text-muted); }
-  .t-accent { color: var(--accent); }
-  .t-key { color: #7dd3fc; }
-  .t-val { color: #c4b5fd; }
-  .t-str { color: #86efac; }
-  .t-num { color: #fb923c; }
-
-  .cursor {
-    display: inline-block;
-    width: 8px;
-    height: 14px;
-    background: var(--accent);
-    vertical-align: middle;
-    animation: blink 1.2s step-end infinite;
-  }
-
-  @keyframes blink { 50% { opacity: 0; } }
 
   /* ---- SECTIONS ---- */
   section {
@@ -897,7 +842,6 @@
   @media (max-width: 900px) {
     .hero-inner { grid-template-columns: 1fr; gap: 48px; }
     .hero-photo-wrap { order: -1; }
-    .hero-photo-frame { width: 180px; height: 180px; }
     .photo-frame { width: 220px; height: 260px; }
     .hero-photo-wrap::before { width: 260px; height: 260px; }
     .about-grid { grid-template-columns: 1fr; gap: 40px; }
@@ -959,6 +903,11 @@
   .scroll-top:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-glow); }
 
   @media (max-width: 600px) { .scroll-top { bottom: 20px; right: 20px; } }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    html { scroll-behavior: auto; }
+  }
 </style>
 </head>
 <body>
@@ -1351,7 +1300,7 @@
 
 <!-- FOOTER -->
 <footer>
-  <div class="footer-copy">dev@patmase:~$ © 2026</div>
+  <div class="footer-copy">dev@patmase:~$ © 2025</div>
   <div class="footer-made">Built with HTML, CSS, JS · Amravati, IN</div>
 </footer>
 
@@ -1399,7 +1348,21 @@
     // scroll-to-top
     if (window.scrollY > 400) scrollTopBtn.classList.add('visible');
     else scrollTopBtn.classList.remove('visible');
+    // close mobile nav on scroll
+    hamburger.classList.remove('open');
+    mobileNav.classList.remove('open');
   }, { passive: true });
+
+  // Close mobile nav on Escape or outside click
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') { hamburger.classList.remove('open'); mobileNav.classList.remove('open'); }
+  });
+  document.addEventListener('click', e => {
+    if (mobileNav.classList.contains('open') && !mobileNav.contains(e.target) && !hamburger.contains(e.target)) {
+      hamburger.classList.remove('open');
+      mobileNav.classList.remove('open');
+    }
+  });
 </script>
 </body>
 </html>
